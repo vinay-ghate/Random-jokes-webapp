@@ -34,6 +34,10 @@ A simple Flask web application that displays a joke in the middle of the page in
 
 3. Enjoy a joke presented in the middle of the page inside a beautiful box with a raining emoji background!
 
+## Screenshot
+![image](https://github.com/vinay-ghate/Random-jokes-webapp/assets/47355614/12301bad-f9a5-4f1a-b8f1-620b77f3eb17)
+
+
 ## Customization
 
 - You can customize the design, colors, and animations by modifying the HTML, CSS, and JavaScript files in the `templates` directory.
