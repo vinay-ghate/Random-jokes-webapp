@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke Page</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* to prevent scrollbars */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to right, #FFD700, #FF8C00); /* adjust colors as needed */
+        }
+
+        #joke-container {
+            padding: 5%;
+            max-width: 70%;
+            background-color: rgba(255, 255, 255, 0.8); /* semi-transparent white background */
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em; /* 2 times the default font size */
+        }
+
+        p {
+            font-size: 1.5em; /* 1.5 times the default font size */
+        }
+
+        .emoji {
+            position: fixed;
+            pointer-events: none;
+            animation: emojiFall linear infinite;
+        }
+
+        @keyframes emojiFall {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+        a {
+            color: #000;
+        }
+        #creator {
+            position: absolute;
+            bottom: 1%;
+            right: 1%;
+            font-size: 1em;
+            color: #161212;
+        }
+
+        @media (min-width: 768px) {
+            #joke-container {
+                padding: 3%;
+                max-width: 50%;
+            }
+
+            h1 {
+                font-size: 3em;
+            }
+
+            p {
+                font-size: 2em;
+            }
+
+            #creator {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="joke-container">
+        <h1>Joke of the Day</h1>
+        <p>{{ joke }}</p>
+        <a href="{{ url_for('index') }}">Next</a>
+    </div>
+
+    <div id="emoji-rain"></div>
+
+    <div id="creator">Created by: Vinay and Chatgpt</div>
+
+    <script>
+        // Function to create and animate emojis
+        function createEmoji() {
+            const emoji = document.createElement('div');
+            emoji.innerHTML = '🤣'; // Add your preferred emoji
+            emoji.classList.add('emoji');
+            document.getElementById('emoji-rain').appendChild(emoji);
+
+            // Set random position
+            const posX = Math.random() * window.innerWidth;
+            const posY = -20; // Start above the viewport
+            emoji.style.left = `${posX}px`;
+            emoji.style.top = `${posY}px`;
+
+            // Set random animation duration
+            const duration = Math.random() * 5 + 2; // Between 2 and 7 seconds
+            emoji.style.animationDuration = `${duration}s`;
+
+            // Remove emoji when animation completes
+            emoji.addEventListener('animationend', () => {
+                emoji.remove();
+                createEmoji(); // Create a new emoji after removal
+            });
+        }
+
+        // Create initial emojis
+        for (let i = 0; i < 20; i++) {
+            createEmoji();
+        }
+    </script>
+</body>
+</html>
